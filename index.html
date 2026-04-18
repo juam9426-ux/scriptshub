@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Scripts</title>
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    color: white;
+
+    background: linear-gradient(270deg, #6a00ff, #00c3ff, #6a00ff);
+    background-size: 600% 600%;
+    animation: fondoAnimado 10s ease infinite;
+}
+
+@keyframes fondoAnimado {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    text-align: center;
+    padding-top: 40px;
+    padding-bottom: 60px;
+}
+
+/* TITULO */
+.titulo {
+    font-size: 45px;
+    letter-spacing: 6px;
+    text-shadow: 0 0 10px #fff, 0 0 25px #00c3ff;
+    margin-bottom: 20px;
+}
+
+/* SELECT */
+.select-box {
+    width: 90%;
+    margin: auto;
+    border-radius: 15px;
+    padding: 2px;
+    background: linear-gradient(135deg, #6a00ff, #00c3ff);
+}
+
+.select-box.active {
+    box-shadow: 0 0 20px #00c3ff;
+}
+
+select {
+    width: 100%;
+    padding: 14px;
+    border-radius: 15px;
+    border: none;
+    font-size: 16px;
+    background: #0d0d1a;
+    color: white;
+}
+
+/* BOTONES */
+button {
+    padding: 14px 30px;
+    border-radius: 15px;
+    border: none;
+    background: linear-gradient(135deg, #6a00ff, #00c3ff);
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin: 8px;
+    transition: 0.3s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+.activo {
+    background: #00ff88 !important;
+    color: black;
+}
+
+#copiarBtn {
+    display: none;
+}
+
+/* RESULTADO */
+#resultado {
+    margin-top: 20px;
+    background: rgba(0,0,0,0.4);
+    padding: 15px;
+    border-radius: 15px;
+    word-break: break-all;
+    font-size: 13px;
+    min-height: 40px;
+}
+
+/* TEXTO OPCIONES */
+.features {
+    margin-top: 30px;
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 8px;
+}
+
+/* DISCORD ABAJO */
+.discord {
+    margin-top: 40px;
+    font-size: 12px;
+    opacity: 0.8;
+}
+
+.discord a {
+    display: inline-block;
+    margin-top: 5px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    background: rgba(0,0,0,0.4);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: #00c3ff;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.discord a:hover {
+    box-shadow: 0 0 10px #00c3ff;
+}
+</style>
+
+</head>
+<body>
+
+<div class="container">
+
+    <h1 class="titulo">SCRIPTS</h1>
+
+    <div id="box" class="select-box">
+        <select id="selector" onchange="activar()">
+            <option value="">Seleccionar script</option>
+            <option value="nova">Nova Hub</option>
+            <option value="stiven">Stiven Hub</option>
+            <option value="semi">Semi TP</option>
+            <option value="lucky">Lucky OG</option>
+        </select>
+    </div>
+
+    <br>
+
+    <button id="generarBtn" onclick="generar()">GENERAR</button>
+    <button id="copiarBtn" onclick="copiar()">COPIAR</button>
+
+    <div id="resultado"></div>
+
+    <!-- OPCIONES -->
+    <div class="features">
+        <div class="row">
+            <div>⚡ Instant generation</div>
+            <div>🔒 Secure proxied webhook</div>
+        </div>
+        <div class="row">
+            <div>🎯 Precise target selection</div>
+        </div>
+    </div>
+
+    <!-- DISCORD -->
+    <div class="discord">
+        acriptts <br>
+        <a href="https://discord.gg/wJq8pWkPCX" target="_blank">Unirse al Discord</a>
+    </div>
+
+</div>
+
+<script>
+let scriptActual = "";
+
+function activar() {
+    document.getElementById("box").classList.add("active");
+}
+
+function generar() {
+    let valor = document.getElementById("selector").value;
+    let resultado = document.getElementById("resultado");
+    let copiarBtn = document.getElementById("copiarBtn");
+    let generarBtn = document.getElementById("generarBtn");
+
+    copiarBtn.style.display = "none";
+    resultado.innerText = "Generando script... ⏳";
+
+    generarBtn.classList.add("activo");
+
+    setTimeout(() => {
+
+        if (valor === "nova") {
+            scriptActual = 'loadstring(game:HttpGet("https://pastefy.app/eN9SLKvp/raw",true))()';
+        }
+        else if (valor === "stiven") {
+            scriptActual = 'loadstring(game:HttpGet("https://pastefy.app/8f8KipWs/raw",true))()';
+        }
+        else if (valor === "semi") {
+            scriptActual = 'loadstring(game:HttpGet("https://pastefy.app/SJc3TPcA/raw",true))()';
+        }
+        else if (valor === "lucky") {
+            scriptActual = 'loadstring(game:HttpGet("https://pastefy.app/fubNaeYN/raw",true))()';
+        }
+        else {
+            scriptActual = "Selecciona un script primero";
+        }
+
+        resultado.innerText = scriptActual;
+
+        if (valor !== "") {
+            copiarBtn.style.display = "inline-block";
+        }
+
+        generarBtn.classList.remove("activo");
+
+    }, 3000);
+}
+
+function copiar() {
+    let copiarBtn = document.getElementById("copiarBtn");
+
+    if (!scriptActual) return;
+
+    navigator.clipboard.writeText(scriptActual).then(() => {
+        copiarBtn.classList.add("activo");
+
+        setTimeout(() => {
+            copiarBtn.classList.remove("activo");
+        }, 1500);
+    });
+}
+</script>
+
+</body>
+</html>
